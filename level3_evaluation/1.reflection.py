@@ -68,8 +68,8 @@ def check_score_goodness(args, pred):
 class ConditionalJokeGenerator(dspy.Module):
     def __init__(self, num_samples=2, num_reflection_steps=2, 
                  temperature=0.7,
-                 idea_lm="openai/gpt-4.1-mini",
-                 joke_lm="openai/gpt-4o"):
+                 idea_lm="groq/llama-3.1-8b-instant",
+                 joke_lm="groq/llama-3.1-8b-instant"):
         self.query_to_idea = dspy.ChainOfThought(QueryToIdea)
         self.query_to_idea.set_lm(lm=dspy.LM(idea_lm, temperature=temperature))
 
@@ -79,7 +79,7 @@ class ConditionalJokeGenerator(dspy.Module):
             module=dspy.ChainOfThought(JokeJudge),
             N=3, reward_fn=check_score_goodness, threshold=1,
         )
-        self.judge.set_lm(dspy.LM("openai/gpt-4.1-mini"))
+        self.judge.set_lm(dspy.LM("groq/llama-3.1-8b-instant"))
         self.num_samples = num_samples
         self.num_reflection_steps = num_reflection_steps
         
@@ -108,8 +108,8 @@ class ConditionalJokeGenerator(dspy.Module):
 
 async def main():
     # Define hyperparameters
-    joke_lms = ["openai/gpt-4.1", "gemini/gemini-1.5-pro"]
-    idea_lms = ["openai/gpt-4.1-mini", "gemini/gemini-2.0-flash"]
+    joke_lms = ["groq/llama-3.1-8b-instant", "groq/qwen/qwen3-32b", "groq/openai/gpt-oss-20b"]
+    idea_lms = ["groq/llama-3.1-8b-instant", "groq/qwen/qwen3-32b", "groq/openai/gpt-oss-20b"]
     temperatures = [0.2, 0.7, 1.2]
     num_samples = [2, 3]
     num_reflection_steps = [1, 3]

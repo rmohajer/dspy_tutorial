@@ -3,7 +3,7 @@ import asyncio
 import random
 import pandas as pd
 
-dspy.configure(lm=dspy.LM("openai/gpt-4.1-mini"), track_usage=True)
+dspy.configure(lm=dspy.LM("groq/qwen/qwen3-32b"), track_usage=True)
 dspy.configure_cache(
     enable_disk_cache=False,
     enable_memory_cache=False,
