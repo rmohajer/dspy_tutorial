@@ -20,10 +20,10 @@ program = dspy.ReAct(signature=HaikuGenerator,
                      tools=[fetch_recent_news, write_things_into_file],
                      max_iters=4)
 
-program.set_lm(lm=dspy.LM("openai/gpt-4.1", temperature=0.7))
+program.set_lm(lm=dspy.LM("groq/llama-3.1-8b-instant", temperature=0.7))
 
 
-pred = program(query="OpenAI")
+pred = program(query="Iranian Protests 2026")
 
 print(pred.summary)
 print()

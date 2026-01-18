@@ -1,8 +1,9 @@
+#%%
 import dspy
 from print_utils import print
 from typing import Optional
 from pydantic import BaseModel, Field
-dspy.configure(lm=dspy.LM("gemini/gemini-2.0-flash"))
+dspy.configure(lm=dspy.LM("groq/qwen/qwen3-32b"))
 
 class JokeIdea(BaseModel):
     setup: str
@@ -64,8 +65,12 @@ class IterativeJokeGenerator(dspy.Module):
 
         return joke
 
+#%% Run the iterative joke generator
+
 joke_generator = IterativeJokeGenerator()
 joke = joke_generator(query="Write a joke about AI that has to do with them turning rogue.")
 
 print("---")
 print(joke.joke)
+
+# %%

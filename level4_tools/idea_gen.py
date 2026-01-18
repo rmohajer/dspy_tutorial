@@ -62,20 +62,17 @@ class IdeaGenerator(dspy.Module):
         )
         
         self.query_to_idea.set_lm(
-            lm=dspy.LM("openai/gpt-4.1-mini", temperature=1)
+            lm=dspy.LM("groq/llama-3.1-8b-instant", temperature=1)
         )
         self.judge.set_lm(
-            lm=dspy.LM("openai/gpt-4.1-mini", temperature=1)
+            lm=dspy.LM("groq/llama-3.1-8b-instant", temperature=1)
         )
 
         self.num_samples = num_samples
         
-    async def acall(self, query: str) -> JokeIdea:
+    def call(self, query: str) -> JokeIdea:
 
-        joke_ideas = await asyncio.gather(
-            *[self.query_to_idea.acall(query=query) for _ in range(self.num_samples)]
-        )
-
+        joke_ideas = [self.query_to_idea(query=query) for _ in range(self.num_samples)]
         print("Generated Joke Ideas: \n", joke_ideas)
 
         judge_score = self.judge(joke_idea=joke_ideas).joke_ratings
@@ -87,9 +84,9 @@ class IdeaGenerator(dspy.Module):
         
         return selected_joke_idea
 
-async def main():
-    joke_generator = ConditionalJokeGenerator()
-    joke = await joke_generator.acall(
+def main():
+    joke_generator = IdeaGenerator()
+    joke = joke_generator.call(
         query="Write a joke about AI that has to do with them turning rogue."
     )
 
@@ -98,4 +95,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()

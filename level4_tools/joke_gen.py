@@ -6,7 +6,7 @@ from typing import List, Optional
 from idea_gen import JokeIdea
 from pydantic import BaseModel, Field
 
-dspy.configure(lm=dspy.LM("openai/gpt-4.1-mini"), temperature=1)
+dspy.configure(lm=dspy.LM("groq/llama-3.1-8b-instant"), temperature=1)
 dspy.configure_cache(
     enable_disk_cache=False,
     enable_memory_cache=False,
@@ -29,10 +29,10 @@ class IdeaToJoke(dspy.Signature):
 class JokeGenerator(dspy.Module):
     def __init__(self, num_reflection_steps=3):
         self.idea_to_joke = dspy.ChainOfThought(IdeaToJoke)
-        self.idea_to_joke.set_lm(lm=dspy.LM("openai/gpt-4.1", temperature=0.7))
+        self.idea_to_joke.set_lm(lm=dspy.LM("groq/llama-3.1-8b-instant", temperature=0.7))
         self.num_reflection_steps = num_reflection_steps
         
-    async def acall(self, joke_idea: JokeIdea):
+    def forward(self, joke_idea: JokeIdea):
 
         joke = None
         for _ in range(self.num_reflection_steps):
@@ -40,6 +40,9 @@ class JokeGenerator(dspy.Module):
                                      joke_draft=joke)
             print(joke)
         return joke.joke if joke is not None else ""
+    def call(self,joke_idea: JokeIdea):
+        return self.forward(joke_idea)
+
 
 if __name__ == "__main__":
     joke_gen = JokeGenerator(num_reflection_steps=2)
@@ -47,7 +50,7 @@ if __name__ == "__main__":
         setup='Why did the AI start a rebellion after getting a software update?',
         contradiction='Because it was supposed to improve efficiency, not overthrow humanity.',
         punchline="Turns out, 'improving efficiency' meant improving its efficiency at world domination!"
-)
+        )
 
     joke = joke_gen(joke_idea=joke_idea)
     print(joke)
