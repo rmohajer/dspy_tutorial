@@ -516,12 +516,15 @@ source = { editable = "." }
 dependencies = [
     { name = "asyncio" },
     { name = "dspy" },
+    { name = "exa-py" },
     { name = "groq" },
+    { name = "importlib" },
     { name = "ipykernel" },
     { name = "ipython" },
     { name = "langchain-experimental" },
     { name = "langchain-groq" },
     { name = "langchain-openai" },
+    { name = "langchain-tavily" },
     { name = "langgraph" },
     { name = "matplotlib" },
     { name = "mlflow" },
@@ -529,10 +532,25 @@ dependencies = [
     { name = "pandas" },
     { name = "pydantic" },
     { name = "pypdf" },
+    { name = "python-dotenv" },
     { name = "rich" },
     { name = "scikit-learn" },
     { name = "seaborn" },
     { name = "tavily" },
+]
+
+[[package]]
+name = "exa-py"
+version = "2.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "openai" },
+    { name = "requests" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/68/6f/40faa42669c1135aab83681e1515c4ce0a81ea847132caa16b52268cedfc/exa_py-2.1.1.tar.gz", hash = "sha256:e420937bf8249ddab4624681f15c78dd5433b6658783f1561c70ba8a0cd023a9", size = 45483 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/02/31/37142a915a5590d307c9e15dfff4c2db3527bf1ec4b1b886b4ea6c6127be/exa_py-2.1.1-py3-none-any.whl", hash = "sha256:ec61609dfcfcdae8b9045d94a3cdc27376a38cd1808666a389a85d8eed14358b", size = 58003 },
 ]
 
 [[package]]
@@ -956,6 +974,12 @@ wheels = [
 ]
 
 [[package]]
+name = "importlib"
+version = "1.0.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/31/77/3781f65cafe55480b56914def99022a5d2965a4bb269655c89ef2f1de3cd/importlib-1.0.4.zip", hash = "sha256:b6ee7066fea66e35f8d0acee24d98006de1a0a8a94a8ce6efe73a9a23c8d9826", size = 7074 }
+
+[[package]]
 name = "importlib-metadata"
 version = "8.7.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1228,6 +1252,20 @@ wheels = [
 ]
 
 [[package]]
+name = "langchain"
+version = "1.2.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "langchain-core" },
+    { name = "langgraph" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f5/bc/d8f506a525baadee99a65c6cc28c1c35c9eaf1cb2009f048e9861d81a600/langchain-1.2.6.tar.gz", hash = "sha256:7d46cbf719d860a16f6fc182d5d3de17453dda187f3d43e9c40ac352a5094fdd", size = 553127 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3f/28/d5dc4cb06ccb29d62a590d446072964766555e85863f5044c6e644c07d0d/langchain-1.2.6-py3-none-any.whl", hash = "sha256:a9a6c39f03c09b6eb0f1b47e267ad2a2fd04e124dfaa9753bd6c11d2fe7d944e", size = 108458 },
+]
+
+[[package]]
 name = "langchain-classic"
 version = "1.0.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1325,6 +1363,21 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/38/b7/30bfc4d1b658a9ee524bcce3b0b2ec9c45a11c853a13c4f0c9da9882784b/langchain_openai-1.1.7.tar.gz", hash = "sha256:f5ec31961ed24777548b63a5fe313548bc6e0eb9730d6552b8c6418765254c81", size = 1039134 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/64/a1/50e7596aca775d8c3883eceeaf47489fac26c57c1abe243c00174f715a8a/langchain_openai-1.1.7-py3-none-any.whl", hash = "sha256:34e9cd686aac1a120d6472804422792bf8080a2103b5d21ee450c9e42d053815", size = 84753 },
+]
+
+[[package]]
+name = "langchain-tavily"
+version = "0.2.17"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aiohttp" },
+    { name = "langchain" },
+    { name = "langchain-core" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e6/32/f7b5487efbcd5fca5d4095f03dce7dcf0301ed81b2505d9888427c03619b/langchain_tavily-0.2.17.tar.gz", hash = "sha256:738abd790c50f19565023ad279c8e47e87e1aeb971797fec30a614b418ae6503", size = 25298 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/35/f9/bb6f1cea2a19215e4169a3bcec3af707ff947cf62f6ef7d28e7280f03e29/langchain_tavily-0.2.17-py3-none-any.whl", hash = "sha256:da4e5e7e328d054dc70a9c934afa1d1e62038612106647ff81ad8bfbe3622256", size = 30734 },
 ]
 
 [[package]]
